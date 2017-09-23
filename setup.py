@@ -36,8 +36,8 @@ if platform.system() == "Windows":
         # print("{key} : {value}".format(key=k, value=v))
         if k == "PCL_ROOT":
             pcl_root = v
-            # print(pcl_root)
-            # print("%s: find environment PCL_ROOT" % pcl_root)
+            print(pcl_root)
+            print("%s: find environment PCL_ROOT" % pcl_root)
             break
     else:
         print("cannot find environment PCL_ROOT", file=sys.stderr)
@@ -446,7 +446,7 @@ else:
 
     # Try to find PCL. XXX we should only do this when trying to build or install.
     PCL_SUPPORTED = ["-1.8", "-1.7", "-1.6", ""]    # in order of preference
-
+    print(PCL_SUPPORTED)
     for pcl_version in PCL_SUPPORTED:
         if subprocess.call(['pkg-config', 'pcl_common%s' % pcl_version]) == 0:
             break
@@ -509,6 +509,7 @@ else:
     # grabber?
     # -lboost_system
     ext_args['extra_link_args'].append('-lboost_system')
+    ext_args['extra_link_args'].append('-lboost_python')
     # ext_args['extra_link_args'].append('-lboost_bind')
 
     # Fix compile error on Ubuntu 12.04 (e.g., Travis-CI).
